@@ -13,24 +13,15 @@ Reverse-engineered Linux CLI tool for configuring and flashing the MonsGeek MG10
 
 ```bash
 sudo apt install libusb-1.0-0-dev
-gcc -o flash_mg108b flash_mg108b.c $(pkg-config --cflags --libs libusb-1.0)
-```
-
-## Setup
-
-Install udev rules for non-root access:
-
-```bash
-echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="3151", MODE="0666"
-SUBSYSTEM=="usb", ATTR{idVendor}=="0461", ATTR{idProduct}=="4001", MODE="0666"' \
-  | sudo tee /etc/udev/rules.d/99-monsgeek.rules
-sudo udevadm control --reload-rules && sudo udevadm trigger
+make
 ```
 
 ## Usage
 
+Requires root for USB access.
+
 ```
-./flash_mg108b get-version
+sudo ./flash_mg108b get-version
 ./flash_mg108b get-battery
 ./flash_mg108b get-rate
 ./flash_mg108b set-rate <125|250|500|1000>

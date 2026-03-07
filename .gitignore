@@ -2,4 +2,5 @@
 !*.md
 !*.c
 !*.sh
+!Makefile
 !.gitignore
