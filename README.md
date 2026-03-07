@@ -1,0 +1,49 @@
+# MonsGeek MG108B Linux Tool
+
+Reverse-engineered Linux CLI tool for configuring and flashing the MonsGeek MG108B keyboard, replacing the Windows-only official driver.
+
+## What's here
+
+- `flash_mg108b.c` — Standalone C tool using libusb for keyboard configuration and firmware flashing
+- `download_firmware.sh` — Script to download the latest firmware from MonsGeek's API
+- `driver.md` — Reverse-engineered USB HID protocol documentation
+- `firmware.md` — Firmware binary analysis (YiChip YC31xx, ARM Cortex-M0)
+
+## Building
+
+```bash
+sudo apt install libusb-1.0-0-dev
+gcc -o flash_mg108b flash_mg108b.c $(pkg-config --cflags --libs libusb-1.0)
+```
+
+## Setup
+
+Install udev rules for non-root access:
+
+```bash
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="3151", MODE="0666"
+SUBSYSTEM=="usb", ATTR{idVendor}=="0461", ATTR{idProduct}=="4001", MODE="0666"' \
+  | sudo tee /etc/udev/rules.d/99-monsgeek.rules
+sudo udevadm control --reload-rules && sudo udevadm trigger
+```
+
+## Usage
+
+```
+./flash_mg108b get-version
+./flash_mg108b get-battery
+./flash_mg108b get-rate
+./flash_mg108b set-rate <125|250|500|1000>
+./flash_mg108b get-debounce
+./flash_mg108b set-debounce <1-10>
+./flash_mg108b get-info
+./flash_mg108b factory-reset
+./flash_mg108b flash <firmware.raw>
+```
+
+Download and flash firmware (**untested — use at your own risk**):
+
+```bash
+./download_firmware.sh
+./flash_mg108b flash mg108b_firmware_v108.raw
+```
