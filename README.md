@@ -44,5 +44,5 @@ sudo ./mgctl flash mg108b_firmware_v108.raw
 
 ## Documentation
 
-See [`doc/`](doc/) for reverse-engineering notes:
+See [`doc/`](doc/) for reverse-engineering notes.
 
