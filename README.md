@@ -40,12 +40,9 @@ sudo ./mgctl flash mg108b_firmware_v108.raw
 sudo ./mgctl flash mg108b_firmware_v108.raw
 ```
 
-> **Warning:** Flashing is untested on hardware other than my own. Use at your own risk.
+> **Warning:** Flashing is untested, use at your own risk.
 
 ## Documentation
 
 See [`doc/`](doc/) for reverse-engineering notes:
-
-- [USB HID Protocol](doc/driver.md) — commands, payloads, checksum format
-- [Firmware Analysis](doc/firmware.md) — YiChip YC31xx, ARM Cortex-M0, memory layout
 
